@@ -24,10 +24,25 @@ if($_GET['user_id']){
         $username = $_POST['username'];
     //    $post_image = $_FILES['post_image']['name'];
     //    $post_image_temp = $_FILES['post_image']['tmp_name'];
+        
+        
+        //encrypt password
 
         $user_email = $_POST['user_email'];
         $user_password = $_POST['user_password'];
-
+        
+        $query = "SELECT randSalt FROM users ";
+         $select_randSalt_query = mysqli_query($conn,$query);
+         
+         if(!$select_randSalt_query){
+             die("Query Failed "+mysqli_error($conn));
+         }
+         
+         $row = mysqli_fetch_array($select_randSalt_query);
+         $randSalt = $row['randSalt'];
+        
+         $user_password = crypt($user_password,$randSalt);
+        
     //    move_uploaded_file($post_image_temp,"../images/$post_image");
         $query = "UPDATE users SET ";
         $query .= "user_firstname = '{$user_firstname}', ";
@@ -94,7 +109,7 @@ if($_GET['user_id']){
    
    <div class="form-group">
        <label for="user_password">Password</label>
-       <input type="password" class="form-control" name="user_password" value="<?php echo $user_password; ?>">
+       <input type="password" class="form-control" name="user_password" value="<?php echo $password; ?>">
    </div>
    
    <div class="form-group">

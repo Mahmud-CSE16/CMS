@@ -34,6 +34,29 @@
         #bulkOptionContainer{
             padding: 0px;
         }
+        
+        #load-screen {   
+        background: url(images/header-back.png);
+        position: fixed;
+        z-index: 10000;
+        top:0px;
+        width: 100%;
+        height: 1600px;
+        }
+
+
+        #loading {
+
+        width: 500px;
+        height: 500px;
+        margin: 10% auto;
+        background: url(images/loader.gif);
+        background-size: 40%;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        }
+
     </style>
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">

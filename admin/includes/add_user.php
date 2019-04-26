@@ -12,6 +12,17 @@ if(isset($_POST['add_user'])){
     $user_password = $_POST['user_password'];
     
 //    move_uploaded_file($post_image_temp,"../images/$post_image");
+    
+    $query = "SELECT randSalt FROM users ";
+         $select_randSalt_query = mysqli_query($conn,$query);
+         
+         if(!$select_randSalt_query){
+             die("Query Failed "+mysqli_error($conn));
+         }
+         
+         $row = mysqli_fetch_array($select_randSalt_query);
+         $randSalt = $row['randSalt'];
+         $user_password = crypt($user_password,$randSalt);
 //    
     $query = "INSERT INTO users(user_firstname,user_lastname,user_role,username,user_email,user_password) ";
     $query .= "VALUES('{$user_firstname}','{$user_lastname}','{$user_role}','{$username}','{$user_email}','{$user_password}' )";

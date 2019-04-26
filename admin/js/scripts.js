@@ -2,8 +2,7 @@
      
      //Editor CKEditor
      ClassicEditor
-        .create( document.querySelector( '#body' ) )
-        .catch( error => {
+        .create( document.querySelector( '#body' ) ).catch( error => {
             console.error( error );
         } );
      

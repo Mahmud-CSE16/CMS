@@ -22,6 +22,7 @@
            $db_user_role = $row['user_role'];
            $db_user_email = $row['user_email'];
        }
+       $password = crypt($password,$db_user_password);
        
        if($username === $db_username && $password === $db_user_password){
            $_SESSION['username']=$db_username;
@@ -30,7 +31,6 @@
            $_SESSION['user_lastname']=$db_user_lastname;
            $_SESSION['user_role']=$db_user_role;
            $_SESSION['user_email']=$db_user_email;
-           $_SESSION['user_password']=$db_user_password;
            header("location: ../admin");
        }else{
            header("location: ../index.php");

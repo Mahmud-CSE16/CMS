@@ -12,7 +12,20 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
                 <?php
-                     $query = "select * from posts where post_status = 'published' ORDER BY post_id DESC ";
+                     
+                     $post_query_count = "SELECT * FROM posts";
+                     $post_count = mysqli_query($conn,$post_query_count);
+                     $count = mysqli_num_rows($post_count);
+                     $count = ceil($count/5);
+                     if(isset($_GET['page'])){
+                         $page = $_GET['page'];
+                         $start_page_post = $page*5-5;
+                     }else{
+                         $start_page_post = 0;
+                         $page = 1;
+                     }
+
+                     $query = "select * from posts where post_status = 'published' ORDER BY post_id DESC LIMIT $start_page_post , 5 ";
                      $select_all = mysqli_query($conn,$query);
                      $rowcount=mysqli_num_rows($select_all);
                      if($rowcount==0){
@@ -29,17 +42,13 @@
                          
                          ?>
                          
-                         <h1 class="page-header">
-                            Page Heading
-                            <small>Secondary Text</small>
-                        </h1>
 
                         <!-- First Blog Post -->
                         <h2>
                             <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title; ?></a>
                         </h2>
                         <p class="lead">
-                            by <a href="index.php"><?php echo $post_author; ?></a>
+                            by <a href="author_posts.php?author=<?php echo $post_author; ?>&p_id=<?php echo $post_id; ?>"><?php echo $post_author; ?></a>
                         </p>
                         <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date; ?> </p>
                         <hr>
@@ -54,6 +63,19 @@
 
                         <hr>
                    <?php }} ?>
+                   
+                   <ul class="pagination">
+                       <?php
+                         for($i=1;$i<=$count;$i++){
+                             if($i==$page){
+                                 echo " <li class='active'><a  href='index.php?page={$i}'>{$i}</a></li>";
+                             }else{
+                                 echo " <li><a href='index.php?page={$i}'>{$i}</a></li>";
+                             }
+                             
+                         }
+                       ?>
+                   </ul>
 
 
             </div>

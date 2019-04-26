@@ -17,6 +17,30 @@
 
     <!-- Custom CSS -->
     <link href="css/blog-home.css" rel="stylesheet">
+    
+    <style>
+        #load-screen {   
+        background: url(admin/images/header-back.png);
+        position: fixed;
+        z-index: 10000;
+        top:0px;
+        width: 100%;
+        height: 1600px;
+        }
+
+
+        #loading {
+
+        width: 500px;
+        height: 500px;
+        margin: 10% auto;
+        background: url(admin/images/loader.gif);
+        background-size: 40%;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        }
+    </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

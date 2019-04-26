@@ -14,10 +14,14 @@
                 <?php
                    if(isset($_GET['p_id'])){
                      $the_post_id = $_GET['p_id'];
+                     $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id={$the_post_id} ";
+                     $send_query = mysqli_query($conn,$view_query);
+                       
                      $query = "select * from posts where post_id = {$the_post_id} ";
                      $select_all = mysqli_query($conn,$query);
 
                      while($row = mysqli_fetch_assoc($select_all)){
+                         $post_id = $row['post_id'];
                          $post_title = $row['post_title'];
                          $post_author = $row['post_author'];
                          $post_date = $row['post_date'];
@@ -36,7 +40,7 @@
                             <a href="#"><?php echo $post_title; ?></a>
                         </h2>
                         <p class="lead">
-                            by <a href="index.php"><?php echo $post_author; ?></a>
+                            by <a href="author_posts.php?author=<?php echo $post_author; ?>&p_id=<?php echo $post_id; ?>"><?php echo $post_author; ?></a>
                         </p>
                         <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date; ?> </p>
                         <hr>

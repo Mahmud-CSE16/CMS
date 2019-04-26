@@ -12,7 +12,7 @@
                 <div class="row" style="overflow-x:auto;">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Welcome to Admin
+                            Welcome to Comments
                             <small>Author</small>
                         </h1>
                         
@@ -31,6 +31,8 @@
                             case 'edit_post':
                                 include "includes/edit_post.php";
                                 break;
+                            case 'post_comments':
+                                include "includes/post_comments.php";
                             default:
                                 include "includes/view_all_comments.php"; 
                                 break;
